@@ -117,26 +117,9 @@ partTwo(std::vector<std::string> const& inputs) {
 
 int
 main(int argc, char const* argv[]) {
-	int part = 0;
-	if (argc == 2) {
-		part = std::atoi(argv[1]);
-	}
-
-	if (part != 1 && part != 2) {
-		std::cout << "Usage: ./main <part>" << std::endl;
-		return 1;
-	}
-
 	std::vector<std::string> inputs;
 	loadInputs(inputs, INPUTS_DIR "02.txt");
-
-	std::cout << "Answer to part " << part << ": ";
-	if (part == 1) {
-		std::cout << partOne(inputs);
-	}
-	else {
-		partTwo(inputs);
-	}
-	std::cout << std::endl;
+	std::cout << "Part one: " << partOne(inputs) << std::endl;
+	partTwo(inputs);
 	return 0;
 }

@@ -179,7 +179,7 @@ partTwo(
 
 int
 main() {
-	auto locations{loadLocations()};
+	auto const locations{loadLocations()};
 	int xmax = 0;
 	int ymax = 0;
 	int xmin = std::numeric_limits<int>::max();

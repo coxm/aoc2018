@@ -198,14 +198,16 @@ partTwo(std::vector<Step>& steps, unsigned numWorkers) {
 int
 main() {
 	// Configuration.
-	char const* const pCost = std::getenv("COST");
-	if (pCost) {
+	if (char const* const pCost = std::getenv("COST")) {
 		Step::s_extraCost = char(std::atoi(pCost));
 	}
-	char const* const pNumWorkers = std::getenv("WORKERS");
-	unsigned const numWorkers = pNumWorkers
-		?	unsigned(std::atoi(pNumWorkers))
-		:	5u;
+	unsigned numWorkers = 5u;
+	if (char const* const pNumWorkers = std::getenv("WORKERS")) {
+		auto const val = std::atoi(pNumWorkers);
+		if (val > 0)
+			numWorkers = unsigned(val);
+	}
+
 	std::printf(
 		"Extra cost: %u; num workers: %u\n",
 		unsigned(Step::s_extraCost),

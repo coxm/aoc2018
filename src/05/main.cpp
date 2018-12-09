@@ -15,7 +15,7 @@ willReact(char a, char b) {
 
 
 int
-partOne(std::string& input) {
+partOne(std::string input) {
 	// Ignore sentinels.
 	int lhs = 1;
 	int const len = int(input.length() - 1);
@@ -68,27 +68,17 @@ getInput() {
 	std::string input;
 	std::ifstream ifs(INPUTS_DIR "05.txt");
 	std::getline(ifs, input);
-	return input;
+	return "/" + input + "/"; // Sentinels.
 }
 
 
 int
 main(int argc, char const* const argv[]) {
-	int part = 0;
-	{
-		char const* const pPart = std::getenv("PART");
-		if (pPart) {
-			part = std::atoi(pPart);
-		}
-		if (part != 1 && part != 2) {
-			std::cout << "Usage: PART=<part> " << argv[0] << std::endl;
-			return 1;
-		}
-	}
-
-	auto input{getInput()};
-	input = "/" + input + "/"; // Sentinels.
-	auto const result = (part == 1) ? partOne(input) : partTwo(input);
-	std::cout << "Chars: " << result << std::endl;
+	auto const input{getInput()};
+	auto const one = partOne(input);
+	auto const two = partTwo(input);
+	std::cout
+		<< "Part one: " << one << std::endl
+		<< "part two: " << two << std::endl;
 	return 0;
 }

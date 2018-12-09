@@ -3,43 +3,38 @@
 #include <fstream>
 #include <vector>
 #include <set>
+#include <numeric>
 
 #include "settings.h"
 
 
-constexpr char const* const pInputFile = INPUTS_DIR "01.txt";
-
-
-void loadInputs(std::vector<int>& inputs) {
+std::vector<int>
+loadInputs() {
+	constexpr char const* pInputFile = INPUTS_DIR "01.txt";
 	std::ifstream ifs{pInputFile};
 	if (!ifs.good()) {
-		std::cerr << "Error loading input file: " << pInputFile << std::endl;
+		std::cerr << "Error loading input file" << std::endl;
 		throw std::runtime_error(pInputFile);
 	}
+	std::vector<int> inputs;
 	int freq;
 	ifs >> freq;
 	while (ifs.good()) {
 		inputs.push_back(freq);
 		ifs >> freq;
 	}
+	return inputs;
 }
 
 
-int partOne() {
-	std::vector<int> inputs;
-	loadInputs(inputs);
-	int sum = 0;
-	for (unsigned i = 0u, len = unsigned(inputs.size()); i < len; ++i) {
-		sum += inputs[i];
-	}
-	return sum;
+int
+partOne(std::vector<int> const& inputs) {
+	return std::accumulate(inputs.begin(), inputs.end(), 0);
 }
 
 
-int partTwo() {
-	std::vector<int> inputs;
-	loadInputs(inputs);
-
+int
+partTwo(std::vector<int> const& inputs) {
 	int sum = 0;
 	std::set<int> frequencies;
 	frequencies.insert(sum);
@@ -59,27 +54,12 @@ int partTwo() {
 }
 
 
-int main(int argc, char const* argv[]) {
-	std::cout << "Reading input from " << pInputFile << std::endl;
-
-	int part = 0;
-	if (argc == 2) {
-		part = std::atoi(argv[1]);
-	}
-
-	int result = 0;
-	switch (part) {
-		case 1:
-			result = partOne();
-			break;
-		case 2:
-			result = partTwo();
-			break;
-		default:
-			std::cout << "Usage: ./main <part>" << std::endl;
-			return 1;
-	}
-
-	std::cout << "Answer to part " << part << ": " << result << std::endl;
+int
+main() {
+	auto const inputs{loadInputs()};
+	auto const one = partOne(inputs);
+	auto const two = partTwo(inputs);
+	std::cout << "Part one: " << one << std::endl;
+	std::cout << "Part two: " << two << std::endl;
 	return 0;
 }

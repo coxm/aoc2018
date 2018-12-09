@@ -132,22 +132,8 @@ partTwo(std::vector<Claim>& claims) {
 
 int
 main(int argc, char const* const argv[]) {
-	int part = 0;
-	if (argc == 2) {
-		part = std::atoi(argv[1]);
-	}
-
 	auto claims(loadInputs());
-	std::printf("Parsed %lu claims\n", claims.size());
-	switch (part) {
-		case 1:
-			partOne(claims);
-			break;
-		case 2:
-			partTwo(claims);
-			break;
-		default:
-			std::printf("Usage: %s <part>\n", argv[0]);
-	}
+	partOne(claims);
+	partTwo(claims);
 	return 0;
 }

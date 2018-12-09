@@ -1,10 +1,8 @@
 #include <iostream>
 #include <algorithm>
-#include <iomanip>
 #include <limits>
 #include <list>
 #include <unordered_map>
-#include <iterator>
 
 
 using circle_type = std::list<unsigned>;

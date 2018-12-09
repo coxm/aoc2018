@@ -10,7 +10,8 @@ As with most CMake projects, run something like:
     cmake ..
     make
 
-Then you can execute each day's program, e.g.:
+You'll have to copy your own input into an `./inputs/` directory too, e.g.
+`./inputs/01.txt`. Then you can execute each day's program, e.g.:
 
     cd build
     ./day-01
